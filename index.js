@@ -3,19 +3,31 @@ import cors from "cors";
 import { FormData } from "formdata-node";
 import fetch from "node-fetch";
 import config from "./config.js";
+import { fileURLToPath } from "url";
+import path from "path";
 
 const { client_id, redirect_uri, client_secret } = config;
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 //middleware
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, "./frontend/build")));
+
+app.get("*", (_, res) => {
+  res.sendFile(path.join(__dirname, "./frontend/build/index.html"), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
 app.post("/authenticate", (req, res) => {
-  console.log("here");
   const { code } = req.body;
 
   const data = new FormData();
@@ -44,7 +56,6 @@ app.post("/authenticate", (req, res) => {
     .then((response) => response.json())
     .then((response) => {
       let newResponse = { ...response, access_token };
-      console.log(newResponse);
       return res.status(200).json(newResponse);
     })
     .catch((error) => {
