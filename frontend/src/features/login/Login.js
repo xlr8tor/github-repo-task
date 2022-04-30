@@ -11,15 +11,8 @@ import {
 import { Wrapper } from "./Login.styles";
 import { UilGithub } from "@iconscout/react-unicons";
 import { getAuthorizeHref } from "../../oauthConfig";
-import { getHashParams } from "../../utils/hashUtils";
-
-const hashParams = getHashParams();
-const access_token = hashParams.access_token;
-const expires_in = hashParams.expires_in;
-// removeHashParamsFromUrl();
 
 const Login = () => {
-  console.log(access_token);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const loginStatus = useSelector((state) => state.auth.status);
 

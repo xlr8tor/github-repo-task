@@ -7,7 +7,7 @@ const Repo = ({ name, language, visibility, updated }) => {
       <div>
         <div className="repo__header">
           <h3 className="repo__title">
-            <a href="#" className="repo__link">
+            <a href="/" className="repo__link">
               {name}
             </a>
             <span></span>
