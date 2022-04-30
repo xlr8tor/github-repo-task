@@ -1,7 +1,7 @@
 const authEndpoint = "https://github.com/login/oauth/authorize";
 
 export const getAuthorizeHref = () => {
-  const clientId = process.env.REACT_APP_CLIENT_ID;
-  const redirectUri = process.env.REACT_APP_REDIRECT_URI;
+  const clientId = "6c1f90610f8c333f562f";
+  const redirectUri = "https://github-repo-task/login";
   return `${authEndpoint}?scope=user&client_id=${clientId}&redirect_uri=${redirectUri}`;
 };
